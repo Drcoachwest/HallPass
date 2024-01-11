@@ -1,69 +1,65 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import {
-  View,
-  TextInput,
   Modal,
   FlatList,
   Text,
+  View,
   TouchableOpacity,
-  Button,
   StyleSheet,
 } from "react-native";
-import { STUDENTINFO } from "../shared/StudentArray";
+import { ROOMNUMBERS } from "../shared/roomNumbers";
+import { TextInput } from "react-native-gesture-handler";
 
-const StudentAutoComplete = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [selectedStudent, setSelectedStudent] = useState(undefined);
-  const [filteredStudents, setFilteredStudents] = useState([]);
+const Destination = () => {
+  const [filteredRoomNumbers, setFilteredRoomNumbers] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [selectedRoomNumber, setSelectedRoomNumber] = useState(undefined);
 
   const handleInputChange = (text) => {
+    console.log(ROOMNUMBERS);
     setInputValue(text);
-    // Filter students based on input value
-    const filtered = STUDENTINFO.filter((student) =>
-      `${student.firstName} ${student.lastName} ${student.idNumber}`
+    // Filter room numbers based on input value
+    const filtered = ROOMNUMBERS.filter((room) =>
+      `${room.roomNumber} ${room.teacherName}`
         .toLowerCase()
         .includes(text.toLowerCase())
     );
-    setFilteredStudents(filtered);
+    console.log(filtered);
+    setFilteredRoomNumbers(filtered);
   };
 
-  const handleItemSelect = (selectedStudent) => {
-    setSelectedStudent(selectedStudent);
+  const handleItemSelect = (selectedRoomNumber) => {
+    setSelectedRoomNumber(selectedRoomNumber);
     setModalVisible(false);
     setInputValue(
-      `${selectedStudent.firstName} ${selectedStudent.lastName} - ${selectedStudent.idNumber}`
+      `${selectedRoomNumber.roomNumber} ${selectedRoomNumber.teacherName}`
     );
   };
 
-  const renderStudentItem = ({ item }) => (
+  const renderRoomItem = ({ item }) => (
     <TouchableOpacity onPress={() => handleItemSelect(item)}>
-      <Text>{`${item.firstName} ${item.lastName} - ${item.idNumber}`}</Text>
+      <Text>{`${item.roomNumber} ${item.teacherName}`}</Text>
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
-      <View>
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Text style={styles.red}>
-            {selectedStudent
-              ? selectedStudent.firstName +
-                " " +
-                selectedStudent.lastName +
-                " " +
-                selectedStudent.idNumber
-              : "Find Student"}
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <Modal
-        visible={isModalVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setModalVisible(false)}
+      <TouchableOpacity
+        style={{
+          color: "white",
+          fontSize: 6,
+        }}
+        onPress={() => setModalVisible(true)}
       >
+        <Text style={styles.red}>
+          {selectedRoomNumber
+            ? `${selectedRoomNumber.roomNumber} ${selectedRoomNumber.teacherName}`
+            : "Destination"}
+        </Text>
+      </TouchableOpacity>
+      <Modal visible={isModalVisible} transparent={true}>
         <View
           style={{
             flex: 1,
@@ -84,15 +80,17 @@ const StudentAutoComplete = () => {
                 borderWidth: 1,
                 padding: 10,
               }}
-              placeholder="Type a student name or ID"
+              placeholder="Room Number or Teacher's Name"
               value={inputValue}
               onChangeText={handleInputChange}
             />
-            <FlatList
-              data={filteredStudents}
-              renderItem={renderStudentItem}
-              keyExtractor={(item) => item.idNumber.toString()}
-            />
+            {inputValue && (
+              <FlatList
+                data={filteredRoomNumbers}
+                renderItem={renderRoomItem}
+                keyExtractor={(item) => item.roomNumber.toString()}
+              />
+            )}
             <TouchableOpacity onPress={() => setModalVisible(false)}>
               <Text>Close</Text>
             </TouchableOpacity>
@@ -122,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StudentAutoComplete;
+export default Destination;

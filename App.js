@@ -1,13 +1,21 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import StudentAutoComplete from "./screens/MainComponent";
+import RoomNumbers from "./screens/RoomNumberField";
+import Destination from "./screens/Destination";
+import TestButton from "./screens/TestButton";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to Hall Pass!</Text>
       <StudentAutoComplete />
-      <StatusBar style="auto" />
+      <View>
+        <RoomNumbers />
+      </View>
+      <View>
+        <Destination />
+        <TestButton />
+      </View>
     </View>
   );
 }
@@ -20,7 +28,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 50,
-    paddingVertical: 8,
+    paddingVertical: 30,
     borderWidth: 4,
     borderColor: "#20232a",
     borderRadius: 6,
