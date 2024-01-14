@@ -1,21 +1,42 @@
 import { Button } from "react-native-elements";
-import {
-  Modal,
-  FlatList,
-  Text,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
+import { useEffect, useState } from "react";
+import QRCODE from "./QRcode";
 
-const TestButton = () => {
+const TestButton = ({ selectedStudent }) => {
+  const [showQRCode, setShowQRCode] = useState(false);
+
+  useEffect(() => {
+    console.log("Use Effect");
+  }, [selectedStudent]);
+
+  const generateQRCode = () => {
+    console.log("Selected Student111", selectedStudent);
+    if (selectedStudent && selectedStudent !== null) {
+      setShowQRCode(true);
+    } else {
+      Alert.alert(
+        "Error",
+        "Please fill in all fields before generating the QR Code"
+      );
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Button
-        title="Create Pass"
-        buttonStyle={styles.button}
-        titleStyle={styles.buttonText}
-      ></Button>
+      {selectedStudent && (
+        <Button
+          title="Create Pass"
+          buttonStyle={styles.button}
+          titleStyle={styles.buttonText}
+          onPress={generateQRCode}
+        />
+      )}
+      {showQRCode && (
+        <View style={{ alignItems: "center", marginTop: 20 }}>
+          <QRCODE value={selectedStudent} />
+        </View>
+      )}
     </View>
   );
 };
@@ -31,4 +52,5 @@ const styles = StyleSheet.create({
     color: "yellow",
   },
 });
+
 export default TestButton;

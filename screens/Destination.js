@@ -15,10 +15,9 @@ const Destination = () => {
   const [filteredRoomNumbers, setFilteredRoomNumbers] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [selectedRoomNumber, setSelectedRoomNumber] = useState(undefined);
+  const [selectedDestination, setSelectedDestination] = useState(undefined);
 
   const handleInputChange = (text) => {
-    console.log(ROOMNUMBERS);
     setInputValue(text);
     // Filter room numbers based on input value
     const filtered = ROOMNUMBERS.filter((room) =>
@@ -26,12 +25,12 @@ const Destination = () => {
         .toLowerCase()
         .includes(text.toLowerCase())
     );
-    console.log(filtered);
+
     setFilteredRoomNumbers(filtered);
   };
 
   const handleItemSelect = (selectedRoomNumber) => {
-    setSelectedRoomNumber(selectedRoomNumber);
+    setSelectedDestination(selectedRoomNumber);
     setModalVisible(false);
     setInputValue(
       `${selectedRoomNumber.roomNumber} ${selectedRoomNumber.teacherName}`
@@ -54,8 +53,8 @@ const Destination = () => {
         onPress={() => setModalVisible(true)}
       >
         <Text style={styles.red}>
-          {selectedRoomNumber
-            ? `${selectedRoomNumber.roomNumber} ${selectedRoomNumber.teacherName}`
+          {selectedDestination
+            ? `${selectedDestination.roomNumber} ${selectedDestination.teacherName}`
             : "Destination"}
         </Text>
       </TouchableOpacity>

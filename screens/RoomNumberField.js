@@ -18,7 +18,6 @@ const RoomNumbers = () => {
   const [selectedRoomNumber, setSelectedRoomNumber] = useState(undefined);
 
   const handleInputChange = (text) => {
-    console.log(ROOMNUMBERS);
     setInputValue(text);
     // Filter room numbers based on input value
     const filtered = ROOMNUMBERS.filter((room) =>
@@ -26,11 +25,12 @@ const RoomNumbers = () => {
         .toLowerCase()
         .includes(text.toLowerCase())
     );
-    console.log(filtered);
+    // console.log(filtered);
     setFilteredRoomNumbers(filtered);
   };
 
   const handleItemSelect = (selectedRoomNumber) => {
+    console.log(selectedRoomNumber);
     setSelectedRoomNumber(selectedRoomNumber);
     setModalVisible(false);
     setInputValue(
@@ -66,7 +66,7 @@ const RoomNumbers = () => {
             justifyContent: "flex-start",
             maxHeight: 400,
             borderColor: "black",
-            // borderWidth: 4,
+
             backgroundColor: "none",
             margin: 20,
             marginTop: 240,

@@ -6,14 +6,13 @@ import {
   FlatList,
   Text,
   TouchableOpacity,
-  Button,
   StyleSheet,
 } from "react-native";
 import { STUDENTINFO } from "../shared/StudentArray";
 
-const StudentAutoComplete = () => {
+const StudentForm = ({ selectedStudent, setSelectedStudent }) => {
   const [inputValue, setInputValue] = useState("");
-  const [selectedStudent, setSelectedStudent] = useState(undefined);
+  // const [selectedStudent, setSelectedStudent] = useState(undefined);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -29,6 +28,7 @@ const StudentAutoComplete = () => {
   };
 
   const handleItemSelect = (selectedStudent) => {
+    console.log("Selected Student from StudentAutoComplete:", selectedStudent);
     setSelectedStudent(selectedStudent);
     setModalVisible(false);
     setInputValue(
@@ -70,7 +70,7 @@ const StudentAutoComplete = () => {
             justifyContent: "flex-start",
             maxHeight: 400,
             borderColor: "black",
-            // borderWidth: 4,
+
             backgroundColor: "none",
             margin: 20,
             marginTop: 240,
@@ -122,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StudentAutoComplete;
+export default StudentForm;
