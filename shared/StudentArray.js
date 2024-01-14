@@ -500,8 +500,8 @@ export const STUDENTINFO = [
     idNumber: 496492,
   },
   {
-    lastName: "West",
-    firstName: "Michael",
+    lastName: "WEST",
+    firstName: "MICHAEl",
     idNumber: 123456,
   },
 ];
