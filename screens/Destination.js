@@ -11,11 +11,10 @@ import {
 import { ROOMNUMBERS } from "../shared/roomNumbers";
 import { TextInput } from "react-native-gesture-handler";
 
-const Destination = () => {
+const Destination = ({ selectedDestination, setSelectedDestination }) => {
   const [filteredRoomNumbers, setFilteredRoomNumbers] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [selectedDestination, setSelectedDestination] = useState(undefined);
 
   const handleInputChange = (text) => {
     setInputValue(text);
@@ -107,12 +106,12 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: "#20232a",
     borderRadius: 6,
-    backgroundColor: "#ffff00",
+    backgroundColor: "#FFE600",
     color: "#ff0000",
     textAlign: "center",
   },
   red: {
-    color: "red",
+    color: "#A51F26",
     fontWeight: "bold",
     paddingVertical: 8,
     padding: 10,
