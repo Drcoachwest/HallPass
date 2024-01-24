@@ -33,3 +33,8 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# firebase API keys
+firebase.ts
+
+.env

@@ -1,17 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
-import StudentForm from "./screens/StudentForm";
-import RoomNumbers from "./screens/RoomNumberField";
-import Destination from "./screens/Destination";
-import TestButton from "./screens/TestButton";
+import StudentForm from "./StudentForm";
+import RoomNumbers from "./RoomNumberField";
+import Destination from "./Destination";
+import TestButton from "./TestButton";
 import { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import Header from "./screens/Header";
+import Header from "./Header";
+import React from "react";
+import { useAuthentication } from "../utils/hooks/useAuthentification";
+import { Button } from "react-native-elements";
+import { getAuth, signOut } from "firebase/auth";
 
-export default function App() {
+export default function TeachersMainScreen() {
   const [selectedStudent, setSelectedStudent] = useState(undefined);
   const [selectedRoomNumber, setSelectedRoomNumber] = useState(undefined);
   const [selectedDestination, setSelectedDestination] = useState(undefined);
-
+  const { user } = useAuthentication();
+  const auth = getAuth();
   return (
     <>
       <Header></Header>
@@ -36,6 +41,12 @@ export default function App() {
             selectedDestination={selectedDestination}
             selectedRoomNumber={selectedRoomNumber}
           />
+          <Button
+            title="Sign Out"
+            buttonStyle={styles.button}
+            titleStyle={styles.buttonText}
+            onPress={() => signOut(auth)}
+          />
         </View>
       </ScrollView>
     </>
@@ -59,5 +70,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 30,
     fontWeight: "bold",
+  },
+  button: { backgroundColor: "#6D161C" },
+  buttonText: {
+    color: "yellow",
   },
 });
